@@ -111,7 +111,7 @@ bool Push(fSTACK &S,float elem)
 void ViewStack(STACK &S)
 {
     int i;
-    cout <<"-----THE STACK-----"<<endl;
+    cout <<"-----THE ｡◕‿◕｡ STACK-----"<<endl;
     if (IsEmpty(S)) {
         cout << "NULL\n";
     }
@@ -125,7 +125,7 @@ void ViewStack(STACK &S)
 void ViewStack(fSTACK &S)
 {
     int i;
-    cout <<"-----THE STACK-----"<<endl;
+    cout <<"-----THE ｡◕‿◕｡ STACK-----"<<endl;
     if (IsEmpty(S)) {
         cout << "NULL\n";
     }
@@ -247,7 +247,6 @@ string convert(string expr,STACK &S)
         if (now == '#') {
             flag++;
         }
-        
         else if ((now >='0' && now <= '9')||(now >= 'a'&&now <= 'z')||(now >= 'A'&&now <= 'Z')||'.'== now) {
             result += now;
         }
@@ -334,10 +333,10 @@ float Calculate(string expr,fSTACK &S)
                 stream >> num;
                 Push(S, num);
                 ViewStack(S);//view the stack
-                stream.clear();//necessary if you dont want to make you program shit!!!
+                stream.clear();//necessary if you dont want to make your program 💩!!
                 floatnum = "";
             }
-            //starting calculate and then push'em back to stack
+            //starting calculating and then push'em back to the stack
             if (now == '+') {
                 Pop(S, opnd1);
                 Pop(S, opnd2);
@@ -372,10 +371,28 @@ float Calculate(string expr,fSTACK &S)
     Pop(S, result);
     return result;
 }
-float Variable()
+float Variable(string expr)
 {
     float result;
-    
+    string temp;
+    STACK s;
+    fSTACK fs;
+    MakeNull(s);
+    MakeNull(fs);
+    string new_expr = "";
+    for(auto c: expr){
+        if(isalpha(c)){
+            cout << c <<"= ?"<<endl;
+            cin >> temp;
+            new_expr += temp;
+        }
+        else{
+            new_expr += c;
+        }
+    }
+    temp = convert(new_expr, s);
+    temp = "#" + temp + "#";
+    result = Calculate(temp, fs);
     return result;
 }
 int main(int argc, const char * argv[]) {
@@ -385,22 +402,34 @@ int main(int argc, const char * argv[]) {
     string expression,postfix;
     int line = 0;
     float result;
+    char choice;
     STACK S;
     fSTACK fS;
     MakeNull(S);
     MakeNull(fS);
     if (in.fail()) {
-        cout << "could not find input.txt"<<endl;
+        cout << "(T＿T)(T＿T)could not find input.txt"<<endl;
         return  1;
     }
+    cout << "是不是要计算变量呢😳？"<<endl<<"Y:是,N:不是"<<endl;
+    cin >> choice;
+    
     while (getline(in,expression)) {
-        cout << ++line <<":"<<expression<<endl;
+        cout << ++line <<":😯😯😯😯看这个(・∀・)😄😄😄😄\n表达式来啦！！接住！！↓↓↓↓\n"<<expression<<endl;
     }
-    postfix = convert(expression,S);
-    ViewStack(S);
-    postfix = '#' +postfix +'#';
-    cout << "the postfix is:"<<postfix<<endl;
-    result = Calculate(postfix, fS);
-    cout <<"the calculate result is:"<<result<<endl;
+    if (choice == 'Y') {
+        result = Variable(expression);
+        cout <<"the calculation result is😉ʅ（´◔౪◔）ʃ :"<<result<<endl;
+    }
+    else if(choice == 'N')
+    {
+        postfix = convert(expression,S);
+        ViewStack(S);
+        postfix = '#' +postfix +'#';
+        cout << "the postfix isʅ(‾◡◝):"<<postfix<<endl;
+        result = Calculate(postfix, fS);
+        cout <<"the calculation result is😉ʅ（´◔౪◔）ʃ :"<<result<<endl;
+    }
+
     return 0;
 }
