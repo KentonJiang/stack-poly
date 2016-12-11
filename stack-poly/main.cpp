@@ -223,7 +223,7 @@ char Precede(char op1,char op2){
     }
 }
 
-//convert infix expression to postfix
+//convert an infix expression to postfix
 string convert(string expr,STACK &S)
 {
     int i = 0,j = 0,flag = 0;
